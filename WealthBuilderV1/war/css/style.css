@@ -743,6 +743,15 @@ padding: 70px 0;
 	outline: none;
 	border: 1px solid #e8e8e8;
 	}
+.contact-left input[type="password"]{
+	width: 93%;
+	color:#4038ae;
+	margin: 0 23px 23px 0;
+	font-size:16px;
+	padding: 12px 10px;
+	outline: none;
+	border: 1px solid #e8e8e8;
+}
 .contact-right textarea{
 	width: 100%;
 	color:#4038ae;
@@ -773,15 +782,7 @@ padding: 70px 0;
 	background: -ms-linear-gradient(left,  #d617cf 0%,#d318ce 0%,#3c39ad 100%,#2989d8 100%,#207cca 100%,#4637af 100%,#2989d8 100%);
 	background: linear-gradient(to right,  #d617cf 0%,#d318ce 0%,#3c39ad 100%,#2989d8 100%,#207cca 100%,#4637af 100%,#2989d8 100%);
 	}
-.contact-form input[type=submit]:hover {
-	background:#4038ae;
-	transform: rotateY(360deg);
-	transition: .5s all;
-	-webkit-transition: .5s all;
-	-o-transition: .5s all;
-	-ms-transition: .5s all;
-	-moz-transition: .5s all;	
-	}
+
 .contact-info h3{
   margin: 0;
   color: #d717cf;
