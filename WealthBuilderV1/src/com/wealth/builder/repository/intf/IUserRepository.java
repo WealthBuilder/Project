@@ -9,5 +9,5 @@ public interface IUserRepository {
 	User retrieveUserByEmailId(String emailId) throws Exception; 
 	
 	User[] retrieveAllUsers() throws Exception; 
-
+	
 }
