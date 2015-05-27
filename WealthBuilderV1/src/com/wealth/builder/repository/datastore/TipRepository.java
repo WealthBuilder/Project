@@ -1,4 +1,4 @@
-package com.wealth.builder.repository;
+package com.wealth.builder.repository.datastore;
 
 import java.text.ParseException;
 import java.util.ArrayList;
