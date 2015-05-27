@@ -39,15 +39,16 @@
 	<div class="container">
 		<div class="contact-form">
 			<div class="contact-info">
-				<h3>Current positions</h3>
-				<table style="width:100%;border: 2px solid #e8e8e8;">
+				<h3>Current positions</h3> 
+				<br>
+				<table class="table-border">
 				<tr>
-					<th width="80" style="text-align:center;border: 2px solid #e8e8e8;"> Started On</th>
-					<th width="100" style="text-align:center;border: 2px solid #e8e8e8;"> Stock Name </th>
-					<th width="300" style="text-align:center"> Tip </th>
-					<th width="100" style="text-align:center"> Status </th>
-					<th width="75" style="text-align:center"> Profit/Loss </th>
-					<th width="200" style="text-align:center"> Remark </th>
+					<th width="100" class="th-border" > Started On</th>
+					<th width="150"  class="th-border"> Stock Name </th>
+					<th width="400" class="th-border"> Tip </th>
+					<th width="100" class="th-border"> Status </th>
+					<th width="100" class="th-border"> Profit/Loss </th>
+					<th width="300" class="th-border"> Remark </th>
 				</tr>
 				</table>
 			</div>
