@@ -14,6 +14,9 @@ public class Tip implements Serializable {
 	public static final String ENTITY_NAME_TIP = "TIP";
 
 	private long tipId;
+
+	public static final String STOCK_NAME="STOCK_NAME";
+	private String stockName;
 	
 	public static final String STATUS="STATUS";
 	private String status;
@@ -23,6 +26,9 @@ public class Tip implements Serializable {
 	
 	public static final String TIP_NEW_LINE="TIP_NEW_LINE";
 	private String newlyAddedLine;
+	
+	public static final String PROFIT="PROFIT";
+	private String profit;
 	
 	public static final String CREATED_DATE="CREATED_DATE";
 	private Date createdDate;
@@ -98,6 +104,22 @@ public class Tip implements Serializable {
 
 	public void setProfile(String profile) {
 		this.profile = profile;
+	}
+
+	public String getStockName() {
+		return stockName;
+	}
+
+	public void setStockName(String stockName) {
+		this.stockName = stockName;
+	}
+
+	public String getProfit() {
+		return profit;
+	}
+
+	public void setProfit(String profit) {
+		this.profit = profit;
 	}
 
 	@Override
