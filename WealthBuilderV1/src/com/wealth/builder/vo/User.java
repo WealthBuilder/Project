@@ -1,9 +1,15 @@
 package com.wealth.builder.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class User {
+public class User implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7025355165364775859L;
+
 	public static final String ENTITY_NAME_USER = "USER";
 	
 	//System generated

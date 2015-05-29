@@ -1,10 +1,16 @@
 package com.wealth.builder.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 
-public class Tip {
+public class Tip implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4346249815100462837L;
+
 	public static final String ENTITY_NAME_TIP = "TIP";
 
 	private long tipId;

@@ -38,22 +38,26 @@
 <div class="contact">
 	<div class="container">
 		<div class="contact-form">
+
 			<div class="contact-info">
-				<h3>PLEASE ENTER YOUR LOGIN DETAILS</h3>
+				<h3>PLEASE ENTER YOUR DETAILS - All Fields are mandatory</h3>
 			</div>
 			<% if(request.getAttribute("ERRORS") != null) {
 			%>
 			<font color="red"><%=request.getAttribute("ERRORS")%></font><br><br>
-			<%} %>			
-			<form action="login" method="post">
+			<%} %>
+			<form action="registerUser" method="post">
 			<div class="contact-left">
-				<input type="text" placeholder="EMAIL" name="EMAIL_ID" required>
-				<input type="password" placeholder="password" name="PASSWORD" required>
+				<input type="text" placeholder="First Name" name="FIRST_NAME"required>
+				<input type="text" placeholder="Last Name" name="LAST_NAME" required>
+				<input type="text" placeholder="Email" name="EMAIL_ID" required>
+				<input type="password" placeholder="password" name="PASSWORD_1" required>
+				<input type="password" placeholder="again password" name="PASSWORD_2" required>
+				<input type="text" placeholder="Mobile" name="MOBILE_NUMBER" required>
+				
 			</div>
 			<div class="clearfix"></div>
-			<input type="submit" value="SUBMIT"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="forgot.jsp">Forgot password ??</a>
-			<br> <br>
-			<p> Not registered yet ? <a href="register.jsp">Sign up NOW - it's FREE</a> </p>
+			<input type="submit" value="SUBMIT"> 
 			</form>
 			
 		</div>
