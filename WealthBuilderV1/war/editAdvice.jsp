@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<%@page import="com.wealth.builder.vo.Tip"%>
-<%@page import="java.util.HashMap"%>
+<%@page import="com.wealth.builder.vo.Advice"%>
+<%@page import="com.wealth.builder.util.DisplayUtil"%>
 <html>
 <head>
 <title>Wealth Builder</title>
@@ -31,7 +31,6 @@
 			});
 		</script>
 	<!-- start-smoth-scrolling -->
-
 </head>
 <body>
 <!-- Header -->
@@ -49,30 +48,28 @@
 			<font color="red"><%=request.getAttribute("ERRORS")%></font><br><br>
 			<%} %>
 			
-			<%
-				HashMap adviceMap = (HashMap)session.getAttribute("ADVICE_MAP");
-				Tip advice = (Tip)adviceMap.get(request.getParameter("adviceId"));
-			
-			%>
-			<form action="saveAdvice" method="post">
+				<% Advice advice = (Advice)session.getAttribute("CURRENT_ADVICE");
+				%>
+
+			<form action="updateAdvice" method="post">
 			<div class="contact-left">
 			
 			    Created Date <input type="text" name="CREATED_DATE" value="<%=advice.getCreatedDate()%>" readonly="readonly">
-				Stock Name <input type="text" name="STOCK_NAME" value="<%=advice.getStockName()%>">
+				Stock Name <input type="text" name="STOCK_NAME" value="<%=advice.getStockName()%>" readonly="readonly">
 				
-				Advice <textarea rows="3" cols="300" NAME="ADVICE"> <%=advice.getTip()%></textarea> 
+				Advice <textarea rows="3" cols="50" NAME="ADVICE"> <%=advice.getAdvice()%></textarea> 
 				
 				Status <input type="text" name="STATUS" value="<%=advice.getStatus()%>">
 				
-				New Line <input type="text" name="NEW_LINE" value="<%=advice.getNewlyAddedLine()%>">
-				
-				New Line Added date <input type="text" name="NEW_LINE_DATE" value="<%=advice.getNewLineAddedDate()%>">
+				Remarks <input type="text" name="REMARK" value="<%=advice.getRemark()%>">
 				
 				Profit <input type="text" name="PROFIT" value="<%=advice.getProfit()%>">
 				
-				Profile <input type="text" name="PROFILE" value="<%=advice.getProfile()%>">
+				Profile <input type="text" name="PROFILE" value="<%=advice.getProfile()%>" readonly="readonly">
 				
-				updated date <input type="text" name="UPDATED_DATE" value="<%=advice.getUpdatedDate()%>">
+				updated date <input type="text" name="UPDATED_DATE" value="<%=advice.getUpdatedDate()%>" readonly="readonly">
+				
+				<input type="hidden" name="ACTION" value="update"/> 
 								
 			</div>
 			<div class="clearfix"></div>

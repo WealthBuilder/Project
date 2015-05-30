@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<%@page import="com.wealth.builder.vo.Tip"%>
+<%@page import="com.wealth.builder.util.DisplayUtil"%>
+<%@page import="com.wealth.builder.vo.Advice"%>
 <html>
 <head>
 <title>Wealth Builder</title>
@@ -51,19 +52,22 @@
 					<th width="100" class="th-border"> Status </th>
 					<th width="100" class="th-border"> Profit/Loss </th>
 					<th width="300" class="th-border"> Remark </th>
+					<th width="100" class="th-border"> Updated Date </th>
 				</tr>
-				<% Tip []advices = (Tip[])session.getAttribute("ADVICES");
+				<% Advice []advices = (Advice[])session.getAttribute("ADVICES");
 					if(advices != null)	{
-						for(Tip advice : advices)	{
+						for(Advice advice : advices)	{
 				%>
 				<tr>
-					<td width="100" class="th-border" > <%=advice.getCreatedDate()%></td>
+					<td width="100" class="th-border" > <%=DisplayUtil.getDisplayableDate(advice.getCreatedDate())%></td>
 					<td width="150"  class="th-border"> <%=advice.getStockName()%> </td>
-					<td width="400" class="th-border"> <%=advice.getTip()%> </td>
+					<td width="400" class="th-border"> <%=advice.getAdvice()%> </td>
 					<td width="100" class="th-border"> <%=advice.getStatus()%> </td>
 					<td width="100" class="th-border"> <%=advice.getProfit()%> </td>
-					<td width="300" class="th-border"> <%=advice.getNewlyAddedLine()%> </td>
-					<td width="50" class="th-border"> <a href="editAdvice.jsp?adviceId=<%=advice.getTipId()%>">Edit</a> </td>
+					<td width="300" class="th-border"> <%=advice.getRemark()%> </td>
+					<td width="100" class="th-border" > <%=DisplayUtil.getDisplayableDate(advice.getUpdatedDate())%></td>
+					<td width="50" class="th-border"> <a href="editAdvice?ACTION=edit&adviceId=<%=advice.getAdviceId()%>">Edit</a> </td>
+					<td width="50" class="th-border"> <a href="editAdvice?ACTION=delete&adviceId=<%=advice.getAdviceId()%>" onclick="return confirm('Are you sure?')">Delete</a> </td>
 				</tr>	
 				<%		}
 					}
@@ -71,7 +75,9 @@
 				</table>
 			</div>
 			
-			<a href="createNewAdvice.jsp"> Create new advice</a>
+			<a href="createNewAdvice.jsp"> Create new advice</a> <br><br>
+			
+			<a href="viewAdvices?ACTION=view"> View All advices </a>
 		</div>
 	</div>
 </div>

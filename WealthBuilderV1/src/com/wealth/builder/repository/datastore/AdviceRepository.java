@@ -20,12 +20,12 @@ import com.google.appengine.api.datastore.Query.FilterOperator;
 
 public class AdviceRepository implements IAdviceRepository {
 
-	private static Logger logger =  Logger.getLogger("TipRepository");
+	private static Logger logger =  Logger.getLogger("AdviceRepository");
 	
 	@Override
-	public long saveTip(Advice advice) throws Exception {
+	public long saveAdvice(Advice advice) throws Exception {
 		
-		logger.entering("saveTip", advice.getTip());
+		logger.info("Entering saveAdvice - " + advice.getStatus());
 		DatastoreService datastoreService = 
 				DatastoreServiceFactory.getDatastoreService();
 		
@@ -33,15 +33,17 @@ public class AdviceRepository implements IAdviceRepository {
 
 		datastoreService.put(tipEntity);
 		
-		logger.info("Saved tip to datastore " + tipEntity.getKey().getId());
+		logger.info("Saved advice to datastore " + tipEntity.getKey().getId());
 		return tipEntity.getKey().getId();
 		
 	}
 
 	@Override
-	public Advice[] retrieveAllTips() throws Exception {
+	public Advice[] retrieveAllAdvices() throws Exception {
 		
-		Query query =  new Query(Advice.ENTITY_NAME_TIP);
+		logger.info("Entering retrieveAllAdvices");
+		
+		Query query =  new Query(Advice.ENTITY_NAME_ADVICE);
 		
 		DatastoreService datastoreService = 
 				DatastoreServiceFactory.getDatastoreService();
@@ -55,16 +57,18 @@ public class AdviceRepository implements IAdviceRepository {
 			tipsList.add(populateTipFromEntity(result));
 		}
 		
+		logger.info("Returning retrieveAllAdvices  - " + tipsList.size());
 		return tipsList.toArray(new Advice[0]);
 	}
 
 	@Override
-	public Advice[] retrieveTipsByStatus(String status) throws Exception {
+	public Advice[] retrieveAdvicesByStatus(String status) throws Exception {
 		
+		logger.info("Entering retrieveAdvicesByStatus - " + status);
 		Filter statusFilter = new FilterPredicate(Advice.STATUS,FilterOperator.EQUAL,status);
 		
 		// Use class Query to assemble a query
-		Query query = new Query(Advice.ENTITY_NAME_TIP).setFilter(statusFilter);
+		Query query = new Query(Advice.ENTITY_NAME_ADVICE).setFilter(statusFilter);
 		
 		DatastoreService datastoreService = 
 				DatastoreServiceFactory.getDatastoreService();
@@ -77,21 +81,16 @@ public class AdviceRepository implements IAdviceRepository {
 			
 			tipsList.add(populateTipFromEntity(result));
 		}
-		
+		logger.info("Returning retrieveAdvicesByStatus  - " + tipsList.size());
 		return tipsList.toArray(new Advice[0]);
 	}
 
-	@Override
-	public void updateTip(Advice advice) throws Exception {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
-	public Advice retrieveTipById(long tipId) throws Exception {
+	public Advice retrieveAdviceById(long tipId) throws Exception {
 		
-		
-		Entity entity = new Entity(Advice.ENTITY_NAME_TIP,tipId);
+		logger.info("Entering retrieveAdviceById - " + tipId);
+		Entity entity = new Entity(Advice.ENTITY_NAME_ADVICE,tipId);
 		
 		Key searchKey = entity.getKey();
 		
@@ -102,6 +101,7 @@ public class AdviceRepository implements IAdviceRepository {
 		
 		Advice advice = populateTipFromEntity(entity);
 		
+		logger.info("Returning retrieveAdviceById - " + advice.getStockName());
 		return advice;
 	}
 	
@@ -109,21 +109,18 @@ public class AdviceRepository implements IAdviceRepository {
 		
 		Advice advice = new Advice();
 		
-		advice.setTipId(entity.getKey().getId());
+		advice.setAdviceId(entity.getKey().getId());
 		
 		DBUtil dbUtil = new DBUtil(entity);
 		
 		advice.setStatus(dbUtil.getStringProperty(Advice.STATUS));
-		advice.setTip(dbUtil.getStringProperty(Advice.TIP));
-		
+		advice.setAdvice(dbUtil.getStringProperty(Advice.ADVICE));
 		advice.setCreatedDate(dbUtil.getDateProperty(Advice.CREATED_DATE));
-		
 		advice.setUpdatedDate(dbUtil.getDateProperty(Advice.UPDATED_DATE));
-		
-		advice.setNewlyAddedLine(dbUtil.getStringProperty(Advice.TIP_NEW_LINE));
-		advice.setNewLineAddedDate(dbUtil.getDateProperty(Advice.NEW_LINE_ADDED_DATE));
-		
+		advice.setRemark(dbUtil.getStringProperty(Advice.REMARK));
 		advice.setProfile(dbUtil.getStringProperty(Advice.PROFILE));
+		advice.setStockName(dbUtil.getStringProperty(Advice.STOCK_NAME));
+		advice.setProfit(dbUtil.getStringProperty(Advice.PROFIT));
 		
 		return advice;
 		
@@ -131,18 +128,39 @@ public class AdviceRepository implements IAdviceRepository {
 	
 	private Entity pupulateEntityFromTip(Advice advice) {
 		
-		Entity entity = new Entity(Advice.ENTITY_NAME_TIP);
+		Entity entity = null;
+				
+		if(advice.getAdviceId() == 0l)	{
+			entity = new Entity(Advice.ENTITY_NAME_ADVICE);
+		}else	{
+			entity = new Entity(Advice.ENTITY_NAME_ADVICE,advice.getAdviceId());
+		}
 		
+		entity.setProperty(Advice.STOCK_NAME, advice.getStockName());
 		entity.setProperty(Advice.STATUS, advice.getStatus());
-		entity.setProperty(Advice.TIP, advice.getTip());
+		entity.setProperty(Advice.ADVICE, advice.getAdvice());
+		entity.setProperty(Advice.PROFIT, advice.getProfit());
 		entity.setProperty(Advice.CREATED_DATE, advice.getCreatedDate());
-		entity.setProperty(Advice.TIP_NEW_LINE, advice.getNewlyAddedLine());
-		entity.setProperty(Advice.NEW_LINE_ADDED_DATE, advice.getNewLineAddedDate());
 		entity.setProperty(Advice.UPDATED_DATE, advice.getUpdatedDate());
+		entity.setProperty(Advice.REMARK, advice.getRemark());
 		entity.setProperty(Advice.PROFILE, advice.getProfile());
 		
 		return entity;
 		
+	}
+
+	@Override
+	public void deleteAdviceById(long adviceId) throws Exception {
+		logger.info("Entering deleteAdviceById - " + adviceId);
+		
+		Entity entity = new Entity(Advice.ENTITY_NAME_ADVICE,adviceId);
+		
+		DatastoreService datastoreService = 
+				DatastoreServiceFactory.getDatastoreService();
+		
+		datastoreService.delete(entity.getKey());
+		
+		logger.info("Returning deleteAdviceById");
 	}
 
 }

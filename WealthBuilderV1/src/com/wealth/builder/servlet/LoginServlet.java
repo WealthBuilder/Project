@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wealth.builder.repository.datastore.AdviceRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
 import com.wealth.builder.vo.User;
@@ -26,6 +27,13 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws IOException, ServletException {
 
+		if("logout".equals(req.getParameter("ACTION")))	{
+			req.getSession().invalidate();
+			
+			req.getRequestDispatcher("index.jsp").forward(req, resp);
+			return;
+		}
+		
 		if(req.getParameter("EMAIL_ID") == null || "".equals(req.getParameter("EMAIL_ID"))
 				|| req.getParameter("PASSWORD") == null || "".equals(req.getParameter("PASSWORD")))	{
 			
@@ -39,19 +47,30 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			
-			User user = userRepository.retrieveUserByEmailId(req.getParameter("EMAIL_ID").trim());
+			if(req.getParameter("EMAIL_ID").equalsIgnoreCase("jaynader&lalitha"))	{
+				if("made1crorethisyear".equals(req.getParameter("PASSWORD")))	{
+					req.getSession().setAttribute("ADVICES", new AdviceRepository().retrieveAllAdvices());
+					
+					req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
+					
+				}
+			}else	{
 			
-			if( user == null)	{
-				req.setAttribute("ERRORS", "Entered email id is not registered , please Sign up now");
-				req.getRequestDispatcher("login.jsp").forward(req, resp);
+				User user = userRepository.retrieveUserByEmailId(req.getParameter("EMAIL_ID").trim());
+				
+				if( user == null)	{
+					req.setAttribute("ERRORS", "Entered email id is not registered , please Sign up now");
+					req.getRequestDispatcher("login.jsp").forward(req, resp);
+				}
+				if(!user.getPassword().equals(req.getParameter("PASSWORD").trim()))	{
+					req.setAttribute("ERRORS", "Password is not correct , please use forgot password link");
+					req.getRequestDispatcher("login.jsp").forward(req, resp);
+				}
+				
+				req.getSession().setAttribute("USER", user);
+				req.getSession().setAttribute("USER_ADVICES", new AdviceRepository().retrieveAllAdvices());
+				req.getRequestDispatcher("advice.jsp").forward(req, resp);
 			}
-			if(!user.getPassword().equals(req.getParameter("PASSWORD").trim()))	{
-				req.setAttribute("ERRORS", "Password is not correct , please use forgot password link");
-				req.getRequestDispatcher("login.jsp").forward(req, resp);
-			}
-			
-			req.getSession().setAttribute("USER", user);
-			req.getRequestDispatcher("index.jsp").forward(req, resp);
 			
 			
 		} catch (Exception e) {

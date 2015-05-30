@@ -33,7 +33,7 @@ public class AdviceServlet extends HttpServlet {
 				Advice advice = new Advice();
 				
 				advice.setStockName(req.getParameter("STOCK_NAME"));
-				advice.setTip(req.getParameter("ADVICE"));
+				advice.setAdvice(req.getParameter("ADVICE"));
 				advice.setStatus(req.getParameter("STATUS"));
 				
 				Date today = Calendar.getInstance().getTime();
@@ -46,14 +46,63 @@ public class AdviceServlet extends HttpServlet {
 				
 				IAdviceRepository adviceRepository = new AdviceRepository();
 				
-				adviceRepository.saveTip(advice);
+				adviceRepository.saveAdvice(advice);
 				
-				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllTips());
+				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllAdvices());
 				
 				req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
 		
 			}
-			
+			if("view".equals(req.getParameter("ACTION")))	{
+				
+				IAdviceRepository adviceRepository = new AdviceRepository();
+				
+				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllAdvices());
+				
+				req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
+			}
+			if("edit".equals(req.getParameter("ACTION")))	{
+				
+				IAdviceRepository adviceRepository = new AdviceRepository();
+				
+				req.getSession().setAttribute("CURRENT_ADVICE",
+						adviceRepository.retrieveAdviceById(Long.parseLong(req.getParameter("adviceId"))));
+				
+				req.getRequestDispatcher("editAdvice.jsp").forward(req, resp);
+				
+			}
+			if("update".equals(req.getParameter("ACTION")))	{
+				
+				Advice advice = (Advice)req.getSession().getAttribute("CURRENT_ADVICE");
+				
+				advice.setAdvice(req.getParameter("ADVICE"));
+				advice.setRemark(req.getParameter("REMARK"));
+				advice.setStatus(req.getParameter("STATUS"));
+				advice.setProfit(req.getParameter("PROFIT"));
+				
+				advice.setUpdatedDate(Calendar.getInstance().getTime());
+				
+				
+				IAdviceRepository adviceRepository = new AdviceRepository();
+				
+				adviceRepository.saveAdvice(advice);
+				
+				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllAdvices());
+				
+				req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
+				
+			}
+			if("delete".equals(req.getParameter("ACTION")))	{
+				
+				IAdviceRepository adviceRepository = new AdviceRepository();
+				
+				adviceRepository.deleteAdviceById(Long.parseLong(req.getParameter("adviceId")));
+				
+				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllAdvices());
+				
+				req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
+				
+			}
 			
 			
 		} catch (Exception e) {

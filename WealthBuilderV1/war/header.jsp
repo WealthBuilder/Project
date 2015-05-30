@@ -18,7 +18,7 @@
 						<li><a href="login.jsp">LOGIN</a></li>
 						<%} %>
 						<% if(request.getSession().getAttribute("USER") != null) { %>
-						<li><a href="logout">LOGOUT</a></li>
+						<li><a href="logout?ACTION=logout">LOGOUT</a></li>
 						<%} %>						
 					</ul>
 				<!-- script for menu -->

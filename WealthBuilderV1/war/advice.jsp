@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@page import="com.wealth.builder.util.DisplayUtil"%>
+<%@page import="com.wealth.builder.vo.Advice"%>
 <html>
 <head>
 <title>Wealth Builder</title>
@@ -39,17 +41,34 @@
 	<div class="container">
 		<div class="contact-form">
 			<div class="contact-info">
+
 				<h3>Current positions</h3> 
 				<br>
 				<table class="table-border">
 				<tr>
 					<th width="100" class="th-border" > Started On</th>
 					<th width="150"  class="th-border"> Stock Name </th>
-					<th width="400" class="th-border"> Tip </th>
+					<th width="400" class="th-border"> Advice </th>
 					<th width="100" class="th-border"> Status </th>
 					<th width="100" class="th-border"> Profit/Loss </th>
 					<th width="300" class="th-border"> Remark </th>
 				</tr>
+				<% Advice []advices = (Advice[])session.getAttribute("USER_ADVICES");
+					if(advices != null)	{
+						for(Advice advice : advices)	{
+				%>
+				
+				<tr>
+					<td width="100" class="th-border" > <%=DisplayUtil.getDisplayableDate(advice.getCreatedDate()) %></td>
+					<td width="150"  class="th-border"> <%=advice.getStockName() %></td>
+					<td width="400" class="th-border"> <%=advice.getAdvice() %> </td>
+					<td width="100" class="th-border"> <%=advice.getStatus() %> </td>
+					<td width="100" class="th-border"> <%=advice.getProfit() %> </td>
+					<td width="300" class="th-border"> <%=advice.getRemark() %> </td>
+				</tr>
+				<% }//for
+				}//if
+				%>
 				</table>
 			</div>
 			

@@ -4,14 +4,14 @@ import com.wealth.builder.vo.Advice;
 
 public interface IAdviceRepository {
 	
-	long saveTip(Advice advice) throws Exception;
+	long saveAdvice(Advice advice) throws Exception;
 	
-	Advice[] retrieveAllTips() throws Exception;
+	Advice[] retrieveAllAdvices() throws Exception;
 	
-	Advice[] retrieveTipsByStatus(String status) throws Exception;
+	Advice[] retrieveAdvicesByStatus(String status) throws Exception;
 	
-	void updateTip(Advice advice) throws Exception;
+	Advice retrieveAdviceById(long tipId) throws Exception;
 	
-	Advice retrieveTipById(long tipId) throws Exception;
-
+	void deleteAdviceById(long adviceId) throws Exception;
+	
 }
