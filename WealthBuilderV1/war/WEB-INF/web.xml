@@ -9,9 +9,13 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>com.wealth.builder.servlet.RegisterUserServlet</servlet-class>
 	</servlet>
 	<servlet>
-	<servlet-name>LoginServlet</servlet-name>
+		<servlet-name>LoginServlet</servlet-name>
 		<servlet-class>com.wealth.builder.servlet.LoginServlet</servlet-class>
 	</servlet>
+	<servlet>
+		<servlet-name>AdviceServlet</servlet-name>
+		<servlet-class>com.wealth.builder.servlet.AdviceServlet</servlet-class>
+	</servlet>	
 		
 	<servlet-mapping>
 		<servlet-name>RegisterUser</servlet-name>
@@ -22,6 +26,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>LoginServlet</servlet-name>
 		<url-pattern>/login</url-pattern>
 	</servlet-mapping>
+	
+	<servlet-mapping>
+		<servlet-name>AdviceServlet</servlet-name>
+		<url-pattern>/saveAdvice</url-pattern>
+	</servlet-mapping>	
 		
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class Tip implements Serializable {
+public class Advice implements Serializable {
 	
 	/**
 	 * 

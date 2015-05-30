@@ -50,9 +50,11 @@
 			<div class="contact-left">
 				Stock Name <input type="text" placeholder="STOCK NAME" name="STOCK_NAME"required>
 				
-				Advice <textarea rows="3" cols="300" placeholder="Advice" NAME="ADVICE"></textarea> 
+				Advice <textarea rows="3" cols="100" placeholder="Advice" NAME="ADVICE"></textarea> 
 				
 				Status <input type="text" placeholder="Status" name="STATUS" required>
+				
+				<input type="hidden" name="ACTION" value="create" />
 								
 			</div>
 			<div class="clearfix"></div>

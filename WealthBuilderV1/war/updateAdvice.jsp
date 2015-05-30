@@ -52,7 +52,7 @@
 					<th width="100" class="th-border"> Profit/Loss </th>
 					<th width="300" class="th-border"> Remark </th>
 				</tr>
-				<% Tip []advices = (Tip[])request.getAttribute("ADVICES");
+				<% Tip []advices = (Tip[])session.getAttribute("ADVICES");
 					if(advices != null)	{
 						for(Tip advice : advices)	{
 				%>

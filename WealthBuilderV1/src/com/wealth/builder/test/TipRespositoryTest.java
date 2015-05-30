@@ -7,8 +7,8 @@ import java.util.TimeZone;
 
 import com.google.appengine.tools.development.testing.LocalDatastoreServiceTestConfig;
 import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
-import com.wealth.builder.repository.datastore.TipRepository;
-import com.wealth.builder.vo.Tip;
+import com.wealth.builder.repository.datastore.AdviceRepository;
+import com.wealth.builder.vo.Advice;
 
 public class TipRespositoryTest {
 
@@ -18,30 +18,30 @@ public class TipRespositoryTest {
 	public static void main(String[] args) throws Exception {
 		helper.setUp();
 		
-		TipRepository tipRepository = new TipRepository();
+		AdviceRepository adviceRepository = new AdviceRepository();
 		
-		Tip tip = new Tip();
+		Advice advice = new Advice();
 		
-		tip.setTip("BUT INFOSYS at 2300 Rs");
+		advice.setTip("BUT INFOSYS at 2300 Rs");
 		
 		Calendar today = Calendar.getInstance();
 		
 		today.setTimeZone(TimeZone.getTimeZone("IST"));
 		
 		System.out.println(today.getTime());
-		tip.setCreatedDate(today.getTime());
-		tip.setStatus("Running");
-		tip.setUpdatedDate(today.getTime());
+		advice.setCreatedDate(today.getTime());
+		advice.setStatus("Running");
+		advice.setUpdatedDate(today.getTime());
 		
-		tipRepository.saveTip(tip);
+		adviceRepository.saveTip(advice);
 		
-		tip.setStatus("Closed");
+		advice.setStatus("Closed");
 		
-		tipRepository.saveTip(tip);
+		adviceRepository.saveTip(advice);
 		
-		tip = tipRepository.retrieveTipById(1);
+		advice = adviceRepository.retrieveTipById(1);
 		
-		System.out.println(tipRepository.retrieveTipsByStatus("a").length);
+		System.out.println(adviceRepository.retrieveTipsByStatus("a").length);
 		
 		helper.tearDown();
 		
