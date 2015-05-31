@@ -65,8 +65,8 @@
 			<ul class="rslides" id="slider3">
 				<li>
 					<div class="banner-info text-center">
-						<h1>WELCOME TO THE WEALTH BUILDER</h1>
-						<p>Free quality stock tips guaranteed.</p>
+						<h1>WELCOME TO WEALTH BOOK</h1>
+						<p>Login to view our profit making advices.</p>
 						<!-- 
 						<div class="start">
 								<a href="#">START TOUR</a>
@@ -76,7 +76,7 @@
 				</li>
 				<li>
 					<div class="banner-info text-center">
-						<h1>RS ONE LAKH TO ONE CRORE IN 18 MONTHS</h1>
+						<h1>RS ONE LAKH TO ONE CRORE IN 60 MONTHS</h1>
 						<p>Earn money consistently in stock market.</p>
 						<!-- 
 						<div class="start">
@@ -107,9 +107,9 @@
 		<div class="about-left">
 			<div class="about-info">
 				<h3>ABOUT US</h3>
-				<p>Our goal is to help everyone to make money in stock market. Almost everyone lose money in stock market and the reason is simple - lack of knowledge.</p>
-				<p>In our research , we found that almost everyone invests money in stock market by just following some expert's advice from TV/moneycontrol and thats the worst way to invest. </p>
-				<a href="readmore.html">READ MORE</a>
+				<p>Our goal is to help everyone to make money in stock market. Almost everyone loses money in stock market and the reason is simple - lack of knowledge.</p>
+				<p>Have you ever lost money in stocks or have you heard that everybody loses money in stocks ? Then who makes money .. </p>
+				<a href="readMore.jsp">READ MORE</a>
 			</div>
 		</div>
 		<div class="about-right">

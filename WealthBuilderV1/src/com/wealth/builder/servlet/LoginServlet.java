@@ -47,10 +47,13 @@ public class LoginServlet extends HttpServlet {
 		
 		try {
 			
-			if(req.getParameter("EMAIL_ID").equalsIgnoreCase("jaynader&lalitha"))	{
+			if(req.getParameter("EMAIL_ID").equalsIgnoreCase("jayander&lalitha"))	{
 				if("made1crorethisyear".equals(req.getParameter("PASSWORD")))	{
+					
 					req.getSession().setAttribute("ADVICES", new AdviceRepository().retrieveAllAdvices());
 					
+					User user = userRepository.retrieveUserByEmailId("jayander@gmail.com");
+					req.getSession().setAttribute("USER", user);
 					req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
 					
 				}
@@ -61,6 +64,8 @@ public class LoginServlet extends HttpServlet {
 				if( user == null)	{
 					req.setAttribute("ERRORS", "Entered email id is not registered , please Sign up now");
 					req.getRequestDispatcher("login.jsp").forward(req, resp);
+					
+					return;
 				}
 				if(!user.getPassword().equals(req.getParameter("PASSWORD").trim()))	{
 					req.setAttribute("ERRORS", "Password is not correct , please use forgot password link");

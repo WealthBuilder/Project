@@ -16,6 +16,16 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>AdviceServlet</servlet-name>
 		<servlet-class>com.wealth.builder.servlet.AdviceServlet</servlet-class>
 	</servlet>	
+	
+	<filter>
+	   <filter-name>LoginFilter</filter-name>
+	   <filter-class>com.wealth.builder.filter.ValidateLogin</filter-class>
+	
+	    <init-param>
+	      <param-name>avoid-urls</param-name>
+	      <param-value>Login.jsp,</param-value>
+	    </init-param>
+	</filter>
 		
 	<servlet-mapping>
 		<servlet-name>RegisterUser</servlet-name>
@@ -51,6 +61,36 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>AdviceServlet</servlet-name>
 		<url-pattern>/updateAdvice</url-pattern>
 	</servlet-mapping>
+		
+	<filter-mapping>
+	    <filter-name>LoginFilter</filter-name>
+	    <url-pattern>/advice.jsp</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+	    <filter-name>LoginFilter</filter-name>
+	    <url-pattern>/updateAdvice.jsp</url-pattern>
+	</filter-mapping>	
+	
+	<filter-mapping>
+	    <filter-name>LoginFilter</filter-name>
+	    <url-pattern>/saveAdvice</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+	    <filter-name>LoginFilter</filter-name>
+	    <url-pattern>/viewAdvices</url-pattern>
+	</filter-mapping>
+	
+	<filter-mapping>
+	    <filter-name>LoginFilter</filter-name>
+	    <url-pattern>/editAdvice</url-pattern>
+	</filter-mapping>
+
+	<filter-mapping>
+	    <filter-name>LoginFilter</filter-name>
+	    <url-pattern>/updateAdvice</url-pattern>
+	</filter-mapping>
 		
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>

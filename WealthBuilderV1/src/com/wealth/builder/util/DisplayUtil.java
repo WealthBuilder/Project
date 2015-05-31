@@ -11,5 +11,13 @@ public class DisplayUtil {
 		
 		return simpleDateFormat.format(date);
 	}
+	
+	public static String getDisplayableString(String value){
+		
+		if (value == null || "null".equalsIgnoreCase(value)){
+			return "";
+		}
+		return value;
+	}
 
 }

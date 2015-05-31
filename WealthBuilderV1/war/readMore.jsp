@@ -1,6 +1,4 @@
 <!DOCTYPE html>
-<%@page import="com.wealth.builder.util.DisplayUtil"%>
-<%@page import="com.wealth.builder.vo.Advice"%>
 <html>
 <head>
 <title>Wealth Builder</title>
@@ -37,42 +35,20 @@
 <!-- Header -->
 <jsp:include page="header.jsp"/>
 <!-- //Header -->
-<div class="contact">
-	<div class="container">
-		<div class="contact-form">
-			<div class="contact-info">
-
-				<h3>Current positions</h3> 
-				<br>
-				<table class="table-border">
-				<tr>
-					<th width="100" class="th-border" > Started On</th>
-					<th width="150"  class="th-border"> Stock Name </th>
-					<th width="400" class="th-border"> Advice </th>
-					<th width="100" class="th-border"> Status </th>
-					<th width="100" class="th-border"> Profit/Loss </th>
-					<th width="300" class="th-border"> Remark </th>
-				</tr>
-				<% Advice []advices = (Advice[])session.getAttribute("USER_ADVICES");
-					if(advices != null)	{
-						for(Advice advice : advices)	{
-				%>
-				
-				<tr>
-					<td width="100" class="th-border" > <%=DisplayUtil.getDisplayableDate(advice.getCreatedDate()) %></td>
-					<td width="150"  class="th-border"> <%=advice.getStockName() %></td>
-					<td width="400" class="th-border"> <textarea rows="3" cols="55"><%=advice.getAdvice() %></textarea> </td>
-					<td width="100" class="th-border"> <%=advice.getStatus() %> </td>
-					<td width="100" class="th-border"> <%=advice.getProfit() %> </td>
-					<td width="300" class="th-border"> <%=DisplayUtil.getDisplayableString(advice.getRemark())%> </td>
-				</tr>
-				<% }//for
-				}//if
-				%>
-				</table>
+<div id="about" class="about">
+	<div class="about-grids">
+		<div class="about-left">
+			<div class="about-info">
+				<h3>Read More</h3>
+				<p>Like any other professions , trading also requires learning.But most of the people start trading without any training , just by getting tips from TV , moneycontrol etc.</p>
+				<p>By the time we learn , either we don't have capital or confidence to do trading. At least this is what happened to me.
+				With my learnings , I have developed a system and software which can predict stock price movement for 1-2 weeks.With WealthBook , I want to help new investor to make money and gain confidence. </p>
 			</div>
-			
 		</div>
+		<div class="about-right">
+			<img src="images/pic2.jpg" alt=""/>
+		</div>
+		<div class="clearfix"></div>
 	</div>
 </div>
 <!--footer-->

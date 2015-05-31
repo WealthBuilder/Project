@@ -68,15 +68,26 @@ public class RegisterUserServlet extends HttpServlet {
 		if(errorFound)	{
 			req.setAttribute("ERRORS", errorMessageBuffer.toString());
 			req.getRequestDispatcher("register.jsp").forward(req, resp);
+			return;
 		}else	{
+			
+			try {
+				
 			IUserRepository userRepository = new UserRepository();
+			
+			if(userRepository.retrieveUserByEmailId(user.getEmaidId()) != null)	{
+				req.setAttribute("ERRORS", "Email - [ " + user.getEmaidId() +" ] is already registered , please enter different emaid id or try forgot password.");
+				req.getRequestDispatcher("register.jsp").forward(req, resp);
+				return;				
+			}
+			
 			user.setActive(true);
 			
 			Date today = Calendar.getInstance().getTime();
 			user.setCreatedDate(today);
 			user.setUpdatedDate(today);
 			
-			try {
+			
 				userRepository.saveUser(user);
 				
 				req.setAttribute("USER", user);
