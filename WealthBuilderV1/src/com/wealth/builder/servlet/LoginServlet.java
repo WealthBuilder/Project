@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wealth.builder.mail.SimpleMailUtil;
 import com.wealth.builder.repository.datastore.AdviceRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
@@ -34,18 +35,50 @@ public class LoginServlet extends HttpServlet {
 			return;
 		}
 		
-		if(req.getParameter("EMAIL_ID") == null || "".equals(req.getParameter("EMAIL_ID"))
-				|| req.getParameter("PASSWORD") == null || "".equals(req.getParameter("PASSWORD")))	{
-			
-			req.setAttribute("ERRORS", "Please enter registered email id and password");
-			req.getRequestDispatcher("login.jsp").forward(req, resp);
-			
-			return;
-		}
-		
-		IUserRepository userRepository = new UserRepository();
-		
 		try {
+		
+			if("recover".equals(req.getParameter("ACTION")))	{
+				
+				User user = new UserRepository().retrieveUserByEmailId(req.getParameter("EMAIL_ID").trim());
+				
+				if( user == null)	{
+					req.setAttribute("ERRORS", "Entered email id - "+ req.getParameter("EMAIL_ID") +" is not registered , please Sign up now");
+					req.getRequestDispatcher("recoverPassword.jsp").forward(req, resp);
+					
+					return;
+				}else	{
+					
+					String subject = "Your Wealthbook Password";
+					
+					String body = "Hi <name> <br>" + 
+					    "Your wealth Book password is - <password>. <br>" + 
+						"To login , visit <a href=\"http://wealthbook.co.in/login.jsp\"> WealthBook </a>";
+					
+					body = body.replace("<name>", user.getFirstName());
+					body = body.replace("<password>", user.getPassword());
+					
+					//mail the password.
+					SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
+					
+					req.setAttribute("ERRORS", "We have emailed your password to - " + user.getEmaidId() + ".Please check your spam folder also.");
+					req.getRequestDispatcher("recoverPassword.jsp").forward(req, resp);
+					
+					return;
+					
+				}
+			}
+		
+			if(req.getParameter("EMAIL_ID") == null || "".equals(req.getParameter("EMAIL_ID"))
+					|| req.getParameter("PASSWORD") == null || "".equals(req.getParameter("PASSWORD")))	{
+				
+				req.setAttribute("ERRORS", "Please enter registered email id and password");
+				req.getRequestDispatcher("login.jsp").forward(req, resp);
+				
+				return;
+			}
+		
+			IUserRepository userRepository = new UserRepository();
+		
 			
 			if(req.getParameter("EMAIL_ID").equalsIgnoreCase("jayander&lalitha"))	{
 				if("made1crorethisyear".equals(req.getParameter("PASSWORD")))	{
@@ -58,7 +91,8 @@ public class LoginServlet extends HttpServlet {
 					
 				}
 			}else	{
-			
+
+				//logic for login
 				User user = userRepository.retrieveUserByEmailId(req.getParameter("EMAIL_ID").trim());
 				
 				if( user == null)	{

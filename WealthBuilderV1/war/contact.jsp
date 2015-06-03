@@ -43,14 +43,14 @@
 			<div class="contact-info">
 				<h3>CONTACT <span>FORM</span></h3>
 			</div>
-			<form>
+			<form action="contact" method="post">
 				<div class="contact-left">
-					<input type="text" placeholder="Name" required>
-					<input type="text" placeholder="E-mail" required>
-					<input type="text" placeholder="Subject" required>
+					<input type="text" placeholder="Name" name="NAME" required>
+					<input type="text" placeholder="E-mail" name="EMAIL" required>
+					<input type="text" placeholder="Subject" name="SUBJECT" required>
 				</div>
 				<div class="contact-right">
-					<textarea placeholder="Message" required></textarea>
+					<textarea placeholder="Message" name="MESSAGE" required></textarea>
 				</div>
 				<div class="clearfix"></div>
 				<input type="submit" value="SUBMIT">

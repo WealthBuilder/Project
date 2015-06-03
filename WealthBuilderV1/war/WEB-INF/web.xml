@@ -16,7 +16,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>AdviceServlet</servlet-name>
 		<servlet-class>com.wealth.builder.servlet.AdviceServlet</servlet-class>
 	</servlet>	
-	
+
+	<servlet>
+		<servlet-name>ContactServlet</servlet-name>
+		<servlet-class>com.wealth.builder.servlet.ContactServlet</servlet-class>
+	</servlet>
+		
 	<filter>
 	   <filter-name>LoginFilter</filter-name>
 	   <filter-class>com.wealth.builder.filter.ValidateLogin</filter-class>
@@ -61,6 +66,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>AdviceServlet</servlet-name>
 		<url-pattern>/updateAdvice</url-pattern>
 	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ContactServlet</servlet-name>
+		<url-pattern>/contact</url-pattern>
+	</servlet-mapping>	
 		
 	<filter-mapping>
 	    <filter-name>LoginFilter</filter-name>

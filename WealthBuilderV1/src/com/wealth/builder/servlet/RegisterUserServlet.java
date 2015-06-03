@@ -87,14 +87,16 @@ public class RegisterUserServlet extends HttpServlet {
 			user.setCreatedDate(today);
 			user.setUpdatedDate(today);
 			
+			userRepository.saveUser(user);
 			
-				userRepository.saveUser(user);
-				
-				req.setAttribute("USER", user);
-				req.getRequestDispatcher("rSuccess.jsp").forward(req, resp);
+			req.setAttribute("USER", user);
+			req.setAttribute("MESSAGE", "Your are now registered with Wealth Book. Please login to view our profit making advices.");
+			
+			req.getRequestDispatcher("rSuccess.jsp").forward(req, resp);
 				
 			} catch (Exception e) {
 				
+				req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later.");
 				req.getRequestDispatcher("failed.jsp").forward(req, resp);
 				//send mail
 				e.printStackTrace();
@@ -105,7 +107,7 @@ public class RegisterUserServlet extends HttpServlet {
 
 	private boolean isEmailValid(String emailId) {
 		
-		if(emailId.length() < 3 || emailId.length() > 20)	{
+		if(emailId.length() < 3 || emailId.length() > 30)	{
 			return false;
 		}
 		try {

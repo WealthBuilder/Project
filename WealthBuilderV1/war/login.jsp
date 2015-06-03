@@ -51,7 +51,7 @@
 				<input type="password" placeholder="password" name="PASSWORD" required>
 			</div>
 			<div class="clearfix"></div>
-			<input type="submit" value="SUBMIT"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="forgot.jsp">Forgot password ??</a>
+			<input type="submit" value="SUBMIT"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="recoverPassword.jsp">Forgot password ??</a>
 			<br> <br>
 			<p> Not registered yet ? <a href="register.jsp">Sign up NOW - it's FREE</a> </p>
 			</form>

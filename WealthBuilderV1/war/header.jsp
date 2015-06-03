@@ -12,7 +12,7 @@
 						<% if(request.getSession().getAttribute("USER") != null) { %>	
 						<li><a href="advice.jsp">ADVICE</a></li>
 						<%} %>
-						<li><a href="faq.html">FAQ</a></li>
+						<li><a href="faq.jsp">FAQ</a></li>
 						<li><a href="contact.jsp">CONTACT</a></li>
 						<% if(request.getSession().getAttribute("USER") == null) { %>
 						<li><a href="login.jsp">LOGIN</a></li>
