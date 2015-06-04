@@ -52,7 +52,9 @@ public class LoginServlet extends HttpServlet {
 					
 					String body = "Hi <name> <br>" + 
 					    "Your wealth Book password is - <password>. <br>" + 
-						"To login , visit <a href=\"http://wealthbook.co.in/login.jsp\"> WealthBook </a>";
+						"To login , visit <a href=\"http://wealthbook.co.in/login.jsp\"> WealthBook </a> <br><br>" +
+					    "Regards <br>" +
+						"wealthBook";
 					
 					body = body.replace("<name>", user.getFirstName());
 					body = body.replace("<password>", user.getPassword());
@@ -113,7 +115,10 @@ public class LoginServlet extends HttpServlet {
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
+			
+			req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later." + e.getCause().getCause().getMessage());
+			req.getRequestDispatcher("failed.jsp").forward(req, resp);
+			//send mail
 			e.printStackTrace();
 		}
 	}

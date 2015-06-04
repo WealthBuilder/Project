@@ -13,13 +13,15 @@ import javax.mail.internet.MimeMessage;
 
 public class SimpleMailUtil {
 
-	private static final String SMTP_HOST_NAME = "smtpauth.net4india.com";
+	//private static final String SMTP_HOST_NAME = "smtpauth.net4india.com";
 
+	private static final String SMTP_HOST_NAME = "smtpauth.net4india.com";
+			
 	private static final String SMTP_PORT = "25";
 
-	private static String USER = "Support@wealthbook.co.in";
+	private static String USER = "jayander@gmail.com";
 	
-	private static String PASSWORD="marathalli123!";
+	private static String PASSWORD="iaminbangalore";
 	
 	
 	/**
@@ -49,14 +51,23 @@ public class SimpleMailUtil {
 		        return new PasswordAuthentication(username, password);
 		    }
 		};
-				
+		
+		/*
 		props.setProperty("mail.smtp.submitter", USER);
 	    props.setProperty("mail.smtp.auth", "true");
 	    props.setProperty("mail.smtp.host", SMTP_HOST_NAME);
 	    props.setProperty("mail.smtp.port", SMTP_PORT);
 	    props.setProperty("mail.smtp.starttls.enable","true");
 	    props.setProperty("mail.transport.protocol", "smtp");
-	    props.setProperty("mail.debug", "false");
+	    props.setProperty("mail.debug", "false"); */
+	    
+		props.put("mail.smtp.host", "smtp.gmail.com");
+		props.put("mail.smtp.socketFactory.port", "465");
+		props.put("mail.smtp.socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
+		props.put("mail.smtp.auth", "true");
+		props.put("mail.smtp.port", "465");
+		
 	    
 		Session session = Session.getDefaultInstance(props,authenticator);
 		

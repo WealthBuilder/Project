@@ -25,7 +25,7 @@ public class ContactServlet extends HttpServlet {
 			throws IOException, ServletException {
 		
 		String body ="Message from - " + req.getParameter("NAME") + "<br>" + 
-				"Email id - " + req.getParameter("NAME") + "<br>" + 
+				"Email id - " + req.getParameter("EMAIL") + "<br>" + 
 				"Message - " + req.getParameter("MESSAGE");
 		
 		String subject = req.getParameter("SUBJECT");
@@ -39,7 +39,7 @@ public class ContactServlet extends HttpServlet {
 			
 		} catch (Exception e) {
 			
-			req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later.");
+			req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later." + e.getMessage());
 			req.getRequestDispatcher("failed.jsp").forward(req, resp);
 			
 			e.printStackTrace();

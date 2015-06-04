@@ -96,7 +96,7 @@ public class RegisterUserServlet extends HttpServlet {
 				
 			} catch (Exception e) {
 				
-				req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later.");
+				req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later." + e.getMessage());
 				req.getRequestDispatcher("failed.jsp").forward(req, resp);
 				//send mail
 				e.printStackTrace();
