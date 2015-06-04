@@ -19,9 +19,9 @@ public class SimpleMailUtil {
 			
 	private static final String SMTP_PORT = "25";
 
-	private static String USER = "jayander@gmail.com";
+	private static String USER = "wealthbook.IT@gmail.com";
 	
-	private static String PASSWORD="iaminbangalore";
+	private static String PASSWORD="marathalli123!";
 	
 	
 	/**

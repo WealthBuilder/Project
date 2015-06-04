@@ -9,7 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.wealth.builder.mail.SimpleMailUtil;
 import com.wealth.builder.repository.datastore.AdviceRepository;
+import com.wealth.builder.repository.datastore.LoggedUserRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
+import com.wealth.builder.repository.intf.ILoggedUserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
 import com.wealth.builder.vo.User;
 
@@ -110,6 +112,10 @@ public class LoginServlet extends HttpServlet {
 				
 				req.getSession().setAttribute("USER", user);
 				req.getSession().setAttribute("USER_ADVICES", new AdviceRepository().retrieveAllAdvices());
+				
+				ILoggedUserRepository loggedUserRepository = new LoggedUserRepository();
+				
+				loggedUserRepository.logInUser(user);
 				req.getRequestDispatcher("advice.jsp").forward(req, resp);
 			}
 			

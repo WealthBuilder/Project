@@ -22,6 +22,11 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-class>com.wealth.builder.servlet.ContactServlet</servlet-class>
 	</servlet>
 		
+	<servlet>
+	    <servlet-name>sessioncleanup</servlet-name>
+	    <servlet-class>com.google.apphosting.utils.servlet.SessionCleanupServlet</servlet-class>
+	</servlet>
+  		
 	<filter>
 	   <filter-name>LoginFilter</filter-name>
 	   <filter-class>com.wealth.builder.filter.ValidateLogin</filter-class>
@@ -71,7 +76,12 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 		<servlet-name>ContactServlet</servlet-name>
 		<url-pattern>/contact</url-pattern>
 	</servlet-mapping>	
-		
+
+    <servlet-mapping>
+         <servlet-name>sessioncleanup</servlet-name>
+         <url-pattern>/_ah/sessioncleanup</url-pattern>
+    </servlet-mapping>
+  		
 	<filter-mapping>
 	    <filter-name>LoginFilter</filter-name>
 	    <url-pattern>/advice.jsp</url-pattern>
@@ -102,6 +112,26 @@ http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
 	    <url-pattern>/updateAdvice</url-pattern>
 	</filter-mapping>
 		
+		<!-- 
+  <security-constraint>
+    <web-resource-collection>
+      <url-pattern>/_ah/sessioncleanup</url-pattern>
+    </web-resource-collection>
+    <auth-constraint>
+      <role-name>admin</role-name>
+    </auth-constraint>
+  </security-constraint>
+  
+   -->
+   
+    <listener>
+		<listener-class>com.wealth.builder.web.session.UserSessionListener</listener-class>
+	</listener>
+	
+   <session-config>
+        <session-timeout>60</session-timeout>
+   </session-config>
+  		
 	<welcome-file-list>
 		<welcome-file>index.jsp</welcome-file>
 	</welcome-file-list>
