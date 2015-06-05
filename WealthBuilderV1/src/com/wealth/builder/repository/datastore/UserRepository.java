@@ -32,10 +32,10 @@ public class UserRepository implements IUserRepository {
 		
 		Entity userEntity = this.populateEntityFromUser(user);
 		
-		datastoreService.put(userEntity);
+		Key key = datastoreService.put(userEntity);
 		
-		logger.info("Returning saveUser - " + userEntity.getKey().getId());
-		return userEntity.getKey().getId();
+		logger.info("Returning saveUser - " + key.getId());
+		return key.getId();
 	}
 
 	@Override
@@ -113,6 +113,8 @@ public class UserRepository implements IUserRepository {
 		User user = new User();
 		
 		DBUtil dbUtil = new DBUtil(entity);
+		
+		user.setUserId(entity.getKey().getId());
 		user.setFirstName(dbUtil.getStringProperty(User.FIRST_NAME));
 		user.setLastName(dbUtil.getStringProperty(User.LAST_NAME));
 		user.setEmaidId(dbUtil.getStringProperty(User.EMAIL_ID));

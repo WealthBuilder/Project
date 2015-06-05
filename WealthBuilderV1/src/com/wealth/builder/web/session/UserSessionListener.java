@@ -30,7 +30,6 @@ public class UserSessionListener implements  HttpSessionAttributeListener {
 			
 			repository.logOutUser(user);
 		}
-		
 	}
 
 	@Override
