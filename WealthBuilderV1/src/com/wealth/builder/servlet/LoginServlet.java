@@ -13,6 +13,7 @@ import com.wealth.builder.repository.datastore.LoggedUserRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.ILoggedUserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
+import com.wealth.builder.service.AdviceService;
 import com.wealth.builder.vo.User;
 
 public class LoginServlet extends HttpServlet {
@@ -111,7 +112,7 @@ public class LoginServlet extends HttpServlet {
 				}
 				
 				req.getSession().setAttribute("USER", user);
-				req.getSession().setAttribute("USER_ADVICES", new AdviceRepository().retrieveAllAdvices());
+				req.getSession().setAttribute("USER_ADVICES", new AdviceService().getAdvicesForUser());
 				
 				ILoggedUserRepository loggedUserRepository = new LoggedUserRepository();
 				
