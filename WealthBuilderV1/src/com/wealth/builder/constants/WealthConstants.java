@@ -12,4 +12,10 @@ public interface WealthConstants {
 
 	final String REQUEST_ATTRIBUTE_ERRORS = "ERRORS";
 
+	final String MAIL_TEMPLATE_WELCOME = "WelcomeMail";
+
+	final String MAIL_TEMPLATE_NEW_ADVICE = "NewAdvice";
+	
+	final String MAIL_TEMPLATE_UPDATE_ADVICE = "UpdateAdvice";
+
 }

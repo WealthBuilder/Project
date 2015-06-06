@@ -11,8 +11,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wealth.builder.constants.WealthConstants;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
+import com.wealth.builder.service.MailService;
 import com.wealth.builder.vo.User;
 
 public class RegisterUserServlet extends HttpServlet {
@@ -89,6 +91,7 @@ public class RegisterUserServlet extends HttpServlet {
 			
 			userRepository.saveUser(user);
 			
+			new MailService().sendWelcomeMail(getServletContext(), user, WealthConstants.MAIL_TEMPLATE_WELCOME);
 			req.setAttribute("USER", user);
 			req.setAttribute("MESSAGE", "Your are now registered with Wealth Book. Please login to view our profit making advices.");
 			
@@ -98,8 +101,6 @@ public class RegisterUserServlet extends HttpServlet {
 				
 				req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later." + e.getMessage());
 				req.getRequestDispatcher("failed.jsp").forward(req, resp);
-				//send mail
-				e.printStackTrace();
 			}
 		}
 		

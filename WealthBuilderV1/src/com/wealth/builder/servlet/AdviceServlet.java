@@ -9,9 +9,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wealth.builder.constants.WealthConstants;
 import com.wealth.builder.repository.datastore.AdviceRepository;
+import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.IAdviceRepository;
+import com.wealth.builder.service.MailService;
 import com.wealth.builder.vo.Advice;
+import com.wealth.builder.vo.User;
 
 public class AdviceServlet extends HttpServlet {
 
@@ -48,6 +52,13 @@ public class AdviceServlet extends HttpServlet {
 				
 				adviceRepository.saveAdvice(advice);
 				
+				//send mail to all users
+				
+				User []allUsers = new UserRepository().retrieveAllUsers();
+				
+				new MailService().sendMailtoAllUsers(getServletContext(), allUsers, 
+						WealthConstants.MAIL_TEMPLATE_NEW_ADVICE, advice.getStockName());
+				
 				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllAdvices());
 				
 				req.getRequestDispatcher("updateAdvice.jsp").forward(req, resp);
@@ -82,10 +93,16 @@ public class AdviceServlet extends HttpServlet {
 				
 				advice.setUpdatedDate(Calendar.getInstance().getTime());
 				
-				
 				IAdviceRepository adviceRepository = new AdviceRepository();
 				
 				adviceRepository.saveAdvice(advice);
+				
+				//send mail to all users
+				
+				User []allUsers = new UserRepository().retrieveAllUsers();
+				
+				new MailService().sendMailtoAllUsers(getServletContext(), allUsers, 
+						WealthConstants.MAIL_TEMPLATE_UPDATE_ADVICE, advice.getStockName());
 				
 				req.getSession().setAttribute("ADVICES",adviceRepository.retrieveAllAdvices());
 				
@@ -106,8 +123,9 @@ public class AdviceServlet extends HttpServlet {
 			
 			
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+			req.setAttribute("ERROR", "OOPS , there was some error while performing your request , please try again later." + e.getMessage());
+			req.getRequestDispatcher("failed.jsp").forward(req, resp);
 		}
 	}
 

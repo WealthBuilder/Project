@@ -29,7 +29,7 @@ public class MailService {
 		
 		String subject = this.getSubjectForTemplate(servletContext,templateId);
 		
-		if(subject == null){
+		if(subject == null)	{
 			logger.info("Subject is not configured for Template [" + templateId + "] , hence existing");
 			return;
 		}
@@ -41,14 +41,27 @@ public class MailService {
 			return;
 		}
 		
-		subject = MessageFormat.format(subject, values);
+		subject = MessageFormat.format(subject, values[0]);
 		
 		for(User user : users)	{
 			
-			body = MessageFormat.format(body, values , user.getFirstName());
+			String newBody = MessageFormat.format(body, values[0] , user.getFirstName());
 			
 			try {
-				SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
+				
+				logger.info("Sending mail to - " + user.getEmaidId() + " - " + values[0]);
+				
+				if (!values[0].equalsIgnoreCase("Test"))	{
+					
+					SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
+					
+				} else	{
+					
+					if("jayander@gmail.com".equalsIgnoreCase(user.getEmaidId()))	{
+					
+						SimpleMailUtil.sendEmail(user.getEmaidId(), subject, newBody);
+					}
+				}
 				
 			} catch (Exception e) {
 				
@@ -101,6 +114,30 @@ public class MailService {
 		}
 		
 		body = MessageFormat.format(body, user.getFirstName() , user.getPassword());
+		
+		SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
+		
+	}
+	
+	public void sendWelcomeMail(ServletContext servletContext, User user , String templateId) throws Exception	{
+		
+		logger.info("Entering sendWelcomeMail - " + templateId);
+		
+		String subject = this.getSubjectForTemplate(servletContext, templateId);
+		
+		if(subject == null){
+			logger.info("Subject is not configured for Template [" + templateId + "] , hence existing");
+			return;
+		}
+		
+		String body = this.getBodyForTemplate(servletContext, templateId);
+		
+		if(body == null){
+			logger.info("Body is not configured for Template [" + templateId + "] , hence existing");
+			return;
+		}
+		
+		body = MessageFormat.format(body, user.getFirstName());
 		
 		SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
 		
