@@ -1,12 +1,15 @@
 package com.wealth.builder.servlet;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.wealth.builder.constants.WealthConstants;
 import com.wealth.builder.mail.SimpleMailUtil;
 import com.wealth.builder.repository.datastore.AdviceRepository;
 import com.wealth.builder.repository.datastore.LoggedUserRepository;
@@ -15,9 +18,12 @@ import com.wealth.builder.repository.intf.ILoggedUserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
 import com.wealth.builder.service.AdviceService;
 import com.wealth.builder.vo.User;
+import com.wealth.builder.service.MailService;
 
 public class LoginServlet extends HttpServlet {
 
+	private static Logger logger =  Logger.getLogger("LoginServlet");
+	
 	/**
 	 * 
 	 */
@@ -32,9 +38,19 @@ public class LoginServlet extends HttpServlet {
 			throws IOException, ServletException {
 
 		if("logout".equals(req.getParameter("ACTION")))	{
+			
+			ILoggedUserRepository loggedUserRepository = new LoggedUserRepository();
+			
+			User user = (User) req.getSession().getAttribute("USER");
+			
+			if(user != null) {
+				loggedUserRepository.logOutUser(user);
+			}
+			
 			req.getSession().invalidate();
 			
 			req.getRequestDispatcher("index.jsp").forward(req, resp);
+			
 			return;
 		}
 		
@@ -51,21 +67,12 @@ public class LoginServlet extends HttpServlet {
 					return;
 				}else	{
 					
-					String subject = "Your Wealthbook Password";
+					new MailService().sendForgotPasswordMail(getServletContext() , user, 
+							WealthConstants.MAIL_TEMPLATE_FORGOT_PWD);
 					
-					String body = "Hi <name> <br>" + 
-					    "Your wealth Book password is - <password>. <br>" + 
-						"To login , visit <a href=\"http://wealthbook.co.in/login.jsp\"> WealthBook </a> <br><br>" +
-					    "Regards <br>" +
-						"wealthBook";
+					req.setAttribute(WealthConstants.REQUEST_ATTRIBUTE_ERRORS, "We have emailed your password to - " 
+							+ user.getEmaidId() + ".Please check your spam folder also.");
 					
-					body = body.replace("<name>", user.getFirstName());
-					body = body.replace("<password>", user.getPassword());
-					
-					//mail the password.
-					SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
-					
-					req.setAttribute("ERRORS", "We have emailed your password to - " + user.getEmaidId() + ".Please check your spam folder also.");
 					req.getRequestDispatcher("recoverPassword.jsp").forward(req, resp);
 					
 					return;

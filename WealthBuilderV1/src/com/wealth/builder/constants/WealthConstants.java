@@ -8,4 +8,8 @@ public interface WealthConstants {
 	
 	final String ADVICE_STATUS_CLOSED = "Closed";
 
+	final String MAIL_TEMPLATE_FORGOT_PWD = "ForgotPWD";
+
+	final String REQUEST_ATTRIBUTE_ERRORS = "ERRORS";
+
 }

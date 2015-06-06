@@ -1,6 +1,7 @@
 package com.wealth.builder.mail;
 
 import java.util.Date;
+
 import java.util.Properties;
 
 import javax.mail.Authenticator;
