@@ -46,7 +46,7 @@
 				<tr>
 					<td width="75"> <b>Question </b></td>
 					<td width="20" align="center"> <b>:</b> </td>
-					<td> <b>What should I know before start I using your advices ?</b> </td>
+					<td> <b>What should I know before I start using your advices ?</b> </td>
 				</tr>
 				<tr>
 					<td colspan="3" height="5"></td>

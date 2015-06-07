@@ -158,8 +158,9 @@ else if (window.attachEvent){
 	</div>
 </div>
 <!--//about-->
+
 <div id="tst" class="float" ><input type="button" name="" value="X" onmouseup="this.parentNode.style.display='none'; " />
-<br/><br/><br/> <a href="faq.jsp" style="text-decoration: none;"> <font color="white" size="4"> 
+ <a href="faq.jsp" style="text-decoration: none;"> <br/><br/><br/><font color="white" size="4"> 
 Before making any position with our advice , please visit FAQ.</font> </a>
 </div> 
 
