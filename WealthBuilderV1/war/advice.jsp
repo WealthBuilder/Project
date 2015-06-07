@@ -16,6 +16,44 @@
 <!-- js -->
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <!-- js -->
+<script type="text/javascript">
+
+function FloatUp(id,ms){
+ var obj=document.getElementById(id),top=document.body.clientHeight;
+ if (window.innerHeight){
+  top=window.innerHeight;
+ }
+ else if (document.documentElement.clientHeight){
+  top=document.documentElement.clientHeight;
+ }
+ animate(obj,'bottom',0,top-obj.offsetHeight,new Date(),ms||2000);
+}
+
+function animate(obj,mde,f,t,srt,mS){
+	 var oop=this,ms=new Date().getTime()-srt,now=(t-f)/mS*ms+f;
+	 if (isFinite(now)){
+	  obj.style[mde]=now+'px';
+	 }
+	 if (ms<mS){
+	  this.dly=setTimeout(function(){ oop.animate(obj,mde,f,t,srt,mS); },10);
+	 }
+	 else {
+	  obj.style[mde]=t+'px';
+	 }
+	}
+	
+function Init(){
+ FloatUp('tst',2000);
+}
+
+if (window.addEventListener){
+ window.addEventListener('load',Init, false);
+}
+else if (window.attachEvent){
+ window.attachEvent('onload',Init);
+}
+
+</script>
 <!--fonts-->
 <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 <!--/fonts-->
@@ -78,6 +116,10 @@
 <!--footer-->
 <jsp:include page="footer.jsp"/>
 <!--//footer-->
+<div id="tst" class="float" ><input type="button" name="" value="X" onmouseup="this.parentNode.style.display='none'; " />
+<br/><br/><br/> <a href="faq.jsp" style="text-decoration: none;"> <font color="white" size="4"> 
+Before making any position with our advice , please visit FAQ.</font> </a>
+</div> 
 <!-- smooth scrolling -->
 	<script type="text/javascript">
 		$(document).ready(function() {
