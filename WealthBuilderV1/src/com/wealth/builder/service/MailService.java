@@ -49,11 +49,11 @@ public class MailService {
 			
 			try {
 				
-				logger.info("Sending mail to - " + user.getEmaidId() + " - " + values[0]);
+				logger.info("Sending mail to - " + user.getEmaidId() + " - " + newBody);
 				
 				if (!values[0].equalsIgnoreCase("Test"))	{
 					
-					SimpleMailUtil.sendEmail(user.getEmaidId(), subject, body);
+					SimpleMailUtil.sendEmail(user.getEmaidId(), subject, newBody);
 					
 				} else	{
 					
