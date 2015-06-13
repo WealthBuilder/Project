@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.wealth.builder.constants.WealthConstants;
+import com.wealth.builder.repository.datastore.LoggedUserRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.service.UserService;
 
@@ -29,7 +30,7 @@ public class ReportServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
-		UserService userService = new UserService(new UserRepository());
+		UserService userService = new UserService(new UserRepository() , new LoggedUserRepository());
 		
 		try	{
 			req.setAttribute(WealthConstants.REQUEST_ATTRIBUTE_TODAY_USERS, 
@@ -40,6 +41,13 @@ public class ReportServlet extends HttpServlet {
 			
 			req.setAttribute(WealthConstants.REQUEST_ATTRIBUTE_MONTHLY_USERS, 
 					userService.getCountUsersRegisteredInMonth());
+			
+			req.setAttribute(WealthConstants.REQUEST_ATTRIBUTE_ALL_USERS, 
+					userService.getCountAllUsers());
+
+			req.setAttribute(WealthConstants.REQUEST_ATTRIBUTE_TODAY_LOGGED_USER, 
+					userService.getCountTodayLoggedInUser());
+			
 			
 			req.getRequestDispatcher("report.jsp").forward(req, resp);
 			

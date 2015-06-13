@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
+import com.wealth.builder.repository.intf.ILoggedUserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
 import com.wealth.builder.vo.User;
 
@@ -14,8 +15,11 @@ public class UserService {
 	
 	IUserRepository userRepository;
 	
-	public UserService(IUserRepository ur)	{
+	ILoggedUserRepository loggedUserRepository;
+	
+	public UserService(IUserRepository ur , ILoggedUserRepository lr)	{
 		this.userRepository = ur;
+		this.loggedUserRepository = lr;
 	}
 	
 	public int getCountAllUsers() throws Exception	{
@@ -87,6 +91,12 @@ public class UserService {
 		logger.info("Returning getCountUsersRegisteredInMonth - " + userList.size());
 		
 		return userList.size();
+	}
+	
+	public int getCountTodayLoggedInUser() throws Exception	{
+		
+		return this.loggedUserRepository.retrieveTodayLoggedInUser().size();
+
 	}
 
 }

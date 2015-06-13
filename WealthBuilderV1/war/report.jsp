@@ -43,7 +43,9 @@
 			<div class="contact-info">
 				<h3>Report  </h3>
 			</div>
+			<font>Total User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_ALL_USERS)%></font> <br>
 			<font>Today User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_TODAY_USERS)%></font> <br>
+			<font>Today Logged Users - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_TODAY_LOGGED_USER)%></font> <br>
 			<font>Weekly User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_WEEKLY_USERS)%></font>  <br>
 			<font>Monthly User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_MONTHLY_USERS)%></font>  <br><br><br>
 			

@@ -24,4 +24,9 @@ public interface WealthConstants {
 
 	final String REQUEST_ATTRIBUTE_MONTHLY_USERS = "MONTHLY_USERS";
 
+	final String REQUEST_ATTRIBUTE_ALL_USERS = "ALL_USERS";
+	
+	final String REQUEST_ATTRIBUTE_TODAY_LOGGED_USER = "TODAY_LOGGED_USER";
+	
+
 }
