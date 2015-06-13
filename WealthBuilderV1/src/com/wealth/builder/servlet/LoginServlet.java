@@ -1,7 +1,6 @@
 package com.wealth.builder.servlet;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.logging.Logger;
 
 import javax.servlet.ServletException;
@@ -10,15 +9,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.wealth.builder.constants.WealthConstants;
-import com.wealth.builder.mail.SimpleMailUtil;
 import com.wealth.builder.repository.datastore.AdviceRepository;
 import com.wealth.builder.repository.datastore.LoggedUserRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.ILoggedUserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
 import com.wealth.builder.service.AdviceService;
-import com.wealth.builder.vo.User;
 import com.wealth.builder.service.MailService;
+import com.wealth.builder.vo.User;
 
 public class LoginServlet extends HttpServlet {
 

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
-<%@page import="com.wealth.builder.util.DisplayUtil"%>
-<%@page import="com.wealth.builder.vo.Advice"%>
+<%@page import="com.wealth.builder.constants.WealthConstants"%>
 <html>
 <head>
 <title>WealthBook</title>
@@ -37,50 +36,18 @@
 <!-- Header -->
 <jsp:include page="header.jsp"/>
 <!-- //Header -->
-
 <div class="contact">
 	<div class="container">
 		<div class="contact-form">
+
 			<div class="contact-info">
-				<h3>Current positions</h3> 
-				<br>
-				<table class="table-border">
-				<tr>
-					<th width="100" class="th-border" > Started On</th>
-					<th width="150"  class="th-border"> Stock Name </th>
-					<th width="400" class="th-border"> Tip </th>
-					<th width="100" class="th-border"> Status </th>
-					<th width="100" class="th-border"> Profit/Loss </th>
-					<th width="300" class="th-border"> Remark </th>
-					<th width="100" class="th-border"> Updated Date </th>
-				</tr>
-				<% Advice []advices = (Advice[])session.getAttribute("ADVICES");
-					if(advices != null)	{
-						for(Advice advice : advices)	{
-				%>
-				<tr>
-					<td width="100" class="th-border" > <%=DisplayUtil.getDisplayableDate(advice.getCreatedDate())%></td>
-					<td width="150"  class="th-border"> <%=advice.getStockName()%> </td>
-					<td width="400" class="th-border"> <%=advice.getAdvice()%> </td>
-					<td width="100" class="th-border"> <%=advice.getStatus()%> </td>
-					<td width="100" class="th-border"> <%=advice.getProfit()%> </td>
-					<td width="300" class="th-border"> <%=advice.getRemark()%> </td>
-					<td width="100" class="th-border" > <%=DisplayUtil.getDisplayableDate(advice.getUpdatedDate())%></td>
-					<td width="50" class="th-border"> <a href="editAdvice?ACTION=edit&adviceId=<%=advice.getAdviceId()%>">Edit</a> </td>
-					<td width="50" class="th-border"> <a href="editAdvice?ACTION=delete&adviceId=<%=advice.getAdviceId()%>" onclick="return confirm('Are you sure?')">Delete</a> </td>
-				</tr>	
-				<%		}
-					}
-				%>
-				</table>
+				<h3>Report  </h3>
 			</div>
+			<font>Today User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_TODAY_USERS)%></font> <br>
+			<font>Weekly User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_WEEKLY_USERS)%></font>  <br>
+			<font>Monthly User - <%=request.getAttribute(WealthConstants.REQUEST_ATTRIBUTE_MONTHLY_USERS)%></font>  <br><br><br>
 			
-			<a href="createNewAdvice.jsp"> Create new advice</a> <br><br>
-			
-			<a href="viewAdvices?ACTION=view"> View All advices </a>  <br><br>
-			
-			<a href="report"> View User Report </a>
-			
+			<a href="javascript: history.go(-1)">Go Back</a>
 		</div>
 	</div>
 </div>

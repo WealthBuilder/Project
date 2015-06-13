@@ -2,6 +2,7 @@ package com.wealth.builder.repository.datastore;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -96,12 +97,12 @@ public class UserRepository implements IUserRepository {
 		
 		Entity entity =  new Entity(User.ENTITY_NAME_USER);
 		
-		entity.setProperty(User.FIRST_NAME, user.getFirstName());
-		entity.setProperty(User.LAST_NAME, user.getLastName());
-		entity.setProperty(User.EMAIL_ID, user.getEmaidId());
-		entity.setProperty(User.MOBILE_NUMBER, user.getMobileNumber());
+		entity.setProperty(User.FIRST_NAME, user.getFirstName().trim());
+		entity.setProperty(User.LAST_NAME, user.getLastName().trim());
+		entity.setProperty(User.EMAIL_ID, user.getEmaidId().trim());
+		entity.setProperty(User.MOBILE_NUMBER, user.getMobileNumber().trim());
 		entity.setProperty(User.ACTIVE, user.isActive());
-		entity.setProperty(User.PASSWORD, user.getPassword());
+		entity.setProperty(User.PASSWORD, user.getPassword().trim());
 		entity.setProperty(User.CREATED_DATE, user.getCreatedDate());
 		entity.setProperty(User.UPDATED_DATE, user.getUpdatedDate());
 		
@@ -126,6 +127,33 @@ public class UserRepository implements IUserRepository {
 		
 		return user;
 		
+	}
+
+	@Override
+	public List<User> retrieveUsersCreatedAfter(Date createdDate) throws Exception {
+		
+		logger.info("Entering retrieveUsersCreatedAfter - " + createdDate);
+		
+		Filter dateFilter = new FilterPredicate(User.CREATED_DATE,
+				FilterOperator.GREATER_THAN_OR_EQUAL,createdDate);
+		
+		Query query =  new Query(User.ENTITY_NAME_USER).setFilter(dateFilter);
+		
+		DatastoreService datastoreService = 
+				DatastoreServiceFactory.getDatastoreService();
+		
+		PreparedQuery preparedQuery = datastoreService.prepare(query);
+		
+		List<User> usersList =  new ArrayList<>();
+		
+		for (Entity result : preparedQuery.asIterable()) {
+			
+			usersList.add(this.populateUserFromEntity(result));
+		}
+		
+		logger.info("Returning retrieveUsersCreatedAfter" + usersList.size());
+		
+		return  usersList;
 	}
 
 }

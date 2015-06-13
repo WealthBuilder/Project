@@ -18,4 +18,10 @@ public interface WealthConstants {
 	
 	final String MAIL_TEMPLATE_UPDATE_ADVICE = "UpdateAdvice";
 
+	final String REQUEST_ATTRIBUTE_TODAY_USERS = "TODAY_USERS";
+
+	final String REQUEST_ATTRIBUTE_WEEKLY_USERS = "WEEKLY_USERS";
+
+	final String REQUEST_ATTRIBUTE_MONTHLY_USERS = "MONTHLY_USERS";
+
 }
