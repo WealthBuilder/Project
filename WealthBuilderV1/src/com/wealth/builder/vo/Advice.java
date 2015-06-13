@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 
-public class Advice implements Serializable {
+public class Advice implements Serializable , Comparable<Advice> {
 	
 	/**
 	 * 
@@ -92,5 +92,10 @@ public class Advice implements Serializable {
 	}
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+	@Override
+	public int compareTo(Advice o) {
+		
+		return o.createdDate.compareTo(this.createdDate);
 	}
 }

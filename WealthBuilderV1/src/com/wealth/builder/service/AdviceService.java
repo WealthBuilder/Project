@@ -22,23 +22,32 @@ public class AdviceService {
 		
 		List<Advice> adviceList = new ArrayList<Advice>();
 		
-		adviceList.addAll(Arrays.asList(
-				adviceRepository.retrieveAdvicesByStatus(
-						WealthConstants.ADVICE_STATUS_NEW)));
+		Advice [] retrivedArray =  adviceRepository.retrieveAdvicesByStatus(
+				WealthConstants.ADVICE_STATUS_NEW);
+		
+		Arrays.sort(retrivedArray);
+		
+		adviceList.addAll(Arrays.asList(retrivedArray));
 		
 		logger.info("Advice with status - " + WealthConstants.ADVICE_STATUS_NEW  
 				+ " - " + adviceList.size());
 		
-		adviceList.addAll(Arrays.asList(
-				adviceRepository.retrieveAdvicesByStatus(
-						WealthConstants.ADVICE_STATUS_RUNNING)));
+		retrivedArray =  adviceRepository.retrieveAdvicesByStatus(
+							WealthConstants.ADVICE_STATUS_RUNNING);
+		
+		Arrays.sort(retrivedArray);
+		
+		adviceList.addAll(Arrays.asList(retrivedArray));
 		
 		logger.info("Advice with status - " + WealthConstants.ADVICE_STATUS_RUNNING  
 				+ " - " + adviceList.size());
 	
-		adviceList.addAll(Arrays.asList(
-				adviceRepository.retrieveAdvicesByStatus(
-						WealthConstants.ADVICE_STATUS_CLOSED)));
+		retrivedArray =  adviceRepository.retrieveAdvicesByStatus(
+						WealthConstants.ADVICE_STATUS_CLOSED);
+		
+		Arrays.sort(retrivedArray);
+		
+		adviceList.addAll(Arrays.asList(retrivedArray));
 		
 		logger.info("Advice with status - " + WealthConstants.ADVICE_STATUS_RUNNING  
 				+ " - " + adviceList.size());
