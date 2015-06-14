@@ -128,7 +128,7 @@ public class LoggedUserRepository implements ILoggedUserRepository {
 		
 		List<Entity> entityList = new ArrayList<Entity>();
 		
-		if(preparedQuery.asIterable().iterator().hasNext()){
+		while(preparedQuery.asIterable().iterator().hasNext()){
 			entityList.add(preparedQuery.asIterable().iterator().next());
 		}
 		
