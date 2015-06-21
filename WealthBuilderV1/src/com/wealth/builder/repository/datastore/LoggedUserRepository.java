@@ -128,8 +128,8 @@ public class LoggedUserRepository implements ILoggedUserRepository {
 		
 		List<Entity> entityList = new ArrayList<Entity>();
 		
-		while(preparedQuery.asIterable().iterator().hasNext()){
-			entityList.add(preparedQuery.asIterable().iterator().next());
+		for(Entity entity : preparedQuery.asIterable()) {
+			entityList.add(entity);
 		}
 		
 		logger.info("retrieveTodayLoggedInUser - " + entityList.size());

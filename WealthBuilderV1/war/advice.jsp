@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<%@page import="com.wealth.builder.constants.WealthConstants"%>
 <%@page import="com.wealth.builder.util.DisplayUtil"%>
 <%@page import="com.wealth.builder.vo.Advice"%>
 <html>
@@ -77,7 +78,10 @@ else if (window.attachEvent){
 <!-- //Header -->
 <div class="contact">
 	<div class="container">
-		<div class="contact-form">
+		<div class="contact-form"> 
+			<font face="verdana" size="4" color="blue">
+				<%=session.getAttribute(WealthConstants.SESSION_ATTRIBUTE_WEEKLY_REMARK)%> 
+			</font>
 			<div class="contact-info">
 
 				<h3>Current positions</h3> 

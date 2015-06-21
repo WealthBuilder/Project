@@ -11,11 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 import com.wealth.builder.constants.WealthConstants;
 import com.wealth.builder.repository.datastore.AdviceRepository;
 import com.wealth.builder.repository.datastore.LoggedUserRepository;
+import com.wealth.builder.repository.datastore.RemarkRepository;
 import com.wealth.builder.repository.datastore.UserRepository;
 import com.wealth.builder.repository.intf.ILoggedUserRepository;
 import com.wealth.builder.repository.intf.IUserRepository;
 import com.wealth.builder.service.AdviceService;
 import com.wealth.builder.service.MailService;
+import com.wealth.builder.service.RemarkService;
 import com.wealth.builder.vo.User;
 
 public class LoginServlet extends HttpServlet {
@@ -119,6 +121,9 @@ public class LoginServlet extends HttpServlet {
 				req.getSession().setAttribute("USER", user);
 				req.getSession().setAttribute("USER_ADVICES", new AdviceService().getAdvicesForUser());
 				
+				req.getSession().setAttribute(WealthConstants.SESSION_ATTRIBUTE_WEEKLY_REMARK , 
+						new RemarkService(new RemarkRepository()).getWeeklyRemark());
+						
 				ILoggedUserRepository loggedUserRepository = new LoggedUserRepository();
 				
 				loggedUserRepository.logInUser(user);
