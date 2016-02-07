@@ -19,37 +19,22 @@
   
   <div id="main">
 
-
-     <div id="header">
-      <div id="logo">
-        <h1><a href="#">Techknowlogy Academy</a></h1>
-        <div class="slogan">Call us @ 8884155355</div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="current" in the li tag for the selected page - to highlight which page you're on   -->
-          <li><a href="index.html">Home</a></li>
-          <li><a href="examples.html">Know Your Trainer</a></li>          
-          <li><a href="examples.html">Find Right Course</a></li>
-          <li class="current"><a href="allCourses.html">All Courses</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-    </div> 
+	<!--  Include header -->
+	<% request.setAttribute("PAGE","ALL_COURSES"); %>
+	<jsp:include page="header.jsp" />
+ 
     <div id="site_content">
-
-
         <h1>Available Trainings</h1>
         
         <div class="contentBoxLeft">
 	        <h3>C Language</h3>
-	        <h5>Next batch starting on - <strong>4th April 2016</strong><br><a href="register.jsp?training=C">Click here to register</a></h5>
-	        <p>This training is best for PU,BE,BCA,MCA students.C is on the oldest programming language.<br /><a href="#">Read more</a></p>
+	        <h5>Next batch starting on - <strong>4th April 2016</strong><br><a href="register.jsp?tName=c">Click here to register</a></h5>
+	        <p>This training is best for PU,BE,BCA,MCA students.C is on the oldest programming language.<br /><a href="courseDetails.jsp?tName=c">Read more</a></p>
         </div>     
         <div class="contentBoxLeft">
 	        <h3>Java</h3>
-	        <h5>Next batch starting on - <strong>4th April 2016</strong><br><a href="register.jsp?training=JAVA">Click here to register</a></h5>
-	        <p>This training is best for PU,BE,BCA,MCA students.Java is most widely used programming language.<br /><a href="#">Read more</a></p>
+	        <h5>Next batch starting on - <strong>4th April 2016</strong><br><a href="register.jsp?training=java">Click here to register</a></h5>
+	        <p>This training is best for PU,BE,BCA,MCA students.Java is most widely used programming language.<br /><a href="courseDetails.jsp?tName=java">Read more</a></p>
         </div>  
         <div class="contentBoxHighlight">
 	        <h3>Java &amp; Advanced Java</h3>

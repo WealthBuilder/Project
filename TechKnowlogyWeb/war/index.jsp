@@ -19,23 +19,10 @@
   
   <div id="main">
 
+	<!--  Include header -->
+	<% request.setAttribute("PAGE","HOME"); %>
+	<jsp:include page="header.jsp" />
 
-     <div id="header">
-      <div id="logo">
-        <h1><a href="#">Techknowlogy Academy</a></h1>
-        <div class="slogan">Call us @ 8884155355</div>
-      </div>
-      <div id="menubar">
-        <ul id="menu">
-          <!-- put class="current" in the li tag for the selected page - to highlight which page you're on   -->
-          <li class="current"><a href="index.html">Home</a></li>
-          <li><a href="examples.html">Know Your Trainer</a></li>          
-          <li><a href="examples.html">Find Right Course</a></li>
-          <li><a href="allCourses.html">All Courses</a></li>
-          <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-      </div>
-    </div> 
     <div id="site_content">
       <div id="sidebar_container">
         <img class="paperclip" src="style/paperclip.png" alt="paperclip" />
@@ -51,9 +38,9 @@
       <div id="content">
         <!-- insert the page content here -->
         <h1>Welcome to Techknowlogy Academy</h1>
-        <h3>You are at right place for your technical training needs.Technologies are involving and Organizations are looking for experts on these technology.
+        <p>You are at right place for your technical training needs.Technologies are involving and Organizations are looking for experts on these technology.
            There is huge demand for technology experts.<strong>Get trained and be ready for opportunities.</strong>
-        </h3>
+        </p>
         
         <h2>Available Trainings</h2>
         <ul>
